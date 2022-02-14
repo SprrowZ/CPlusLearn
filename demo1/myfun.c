@@ -5,6 +5,6 @@
 #include <stdio.h>
 #include "myfun.h"
 
-void display() {
-    printf("C test");
-}
+//void display() {
+//    printf("C test");
+//}
