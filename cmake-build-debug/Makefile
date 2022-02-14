@@ -149,6 +149,33 @@ TestCinCout.cpp.s:
 	$(MAKE) -f CMakeFiles\untitled1.dir\build.make CMakeFiles/untitled1.dir/TestCinCout.cpp.s
 .PHONY : TestCinCout.cpp.s
 
+cdemo/ctest.obj: cdemo/ctest.c.obj
+
+.PHONY : cdemo/ctest.obj
+
+# target to build an object file
+cdemo/ctest.c.obj:
+	$(MAKE) -f CMakeFiles\untitled1.dir\build.make CMakeFiles/untitled1.dir/cdemo/ctest.c.obj
+.PHONY : cdemo/ctest.c.obj
+
+cdemo/ctest.i: cdemo/ctest.c.i
+
+.PHONY : cdemo/ctest.i
+
+# target to preprocess a source file
+cdemo/ctest.c.i:
+	$(MAKE) -f CMakeFiles\untitled1.dir\build.make CMakeFiles/untitled1.dir/cdemo/ctest.c.i
+.PHONY : cdemo/ctest.c.i
+
+cdemo/ctest.s: cdemo/ctest.c.s
+
+.PHONY : cdemo/ctest.s
+
+# target to generate assembly for a file
+cdemo/ctest.c.s:
+	$(MAKE) -f CMakeFiles\untitled1.dir\build.make CMakeFiles/untitled1.dir/cdemo/ctest.c.s
+.PHONY : cdemo/ctest.c.s
+
 demo1/myfun.obj: demo1/myfun.c.obj
 
 .PHONY : demo1/myfun.obj
@@ -242,6 +269,9 @@ help:
 	@echo ... TestCinCout.obj
 	@echo ... TestCinCout.i
 	@echo ... TestCinCout.s
+	@echo ... cdemo/ctest.obj
+	@echo ... cdemo/ctest.i
+	@echo ... cdemo/ctest.s
 	@echo ... demo1/myfun.obj
 	@echo ... demo1/myfun.i
 	@echo ... demo1/myfun.s

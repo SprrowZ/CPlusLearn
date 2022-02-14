@@ -10,7 +10,7 @@ void display() {
     cout<<"Hello~"<<endl;
 }
 
-int main() {
-    display();
-    return 0 ;
-}
+//int main() {
+//    display();
+//    return 0 ;
+//}
