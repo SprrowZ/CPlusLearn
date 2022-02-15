@@ -31,9 +31,34 @@ void demoPointer3() {
     printf("a value: %f, p value: %d,*p value :%f", a, p, *p);
 }
 
+void demoPointer4() {
+    int a = 15, b = 99, c = 21;
+    int *p = &a;
+    *p = b;
+    c = *p;
+    printf("%d,%d,%d,%d,", a, b, c, *p);
+}
+
+void demoPointer5(){
+    int a =55;
+    int *p;
+    p =&a;
+    printf(" &a:%d,*&a:%d,&*p:%d,p:%d,*p:%d",&a,*&a,&*p,p,*p);
+}
+//数组指针
+void demoPointer6(){
+    int arr[] = {55,21,32,16,2};
+    int len = sizeof(arr)/ sizeof(int);//数组长度
+    int i;
+    for (i = 0; i <len ; ++i) {
+        printf("%d ",*(arr+i));
+    }
+}
+
+
 int main() {
     //printf("value:%d", M(3)/2);
-    demoPointer3();
+    demoPointer6();
     return 0;
 }
 
