@@ -124,11 +124,44 @@ void testArrPointer() {
     int len = sizeof(arr) / sizeof(int);
     printf("maxValue is %d", findMaxValue(arr, len));
 }
+//指针作为返回值
+char *demoPointer10(char *str1, char *str2) {
+    if (strlen(str1) > strlen(str2)) {
+        return str1;
+    } else {
+        return str2;
+    }
+}
+
+void testMethodPointer() {
+    char *a = "hello~";
+    char *b = "I am Chinese";
+    char *result = demoPointer10(a, b);
+    printf("%s\n", result);
+}
+//二级指针
+void  demoPointer11() {
+    int a = 100;
+    int *p1 = &a;
+    int **p2 = &p1;
+    int ***p3 = &p2;
+    printf("a:%d,*p1:%d,**p2:%d,***p3:%d\n",a,*p1,**p2,***p3);
+    printf("p1:%d,*p2:%d,**p3:%d",p1,*p2,**p3);
+}
+//二维数组指针
+void demoPointer12(){
+    int a[3][4] = {{0,1,2,3},{4,5,6,7},
+                   {8,9,10,11}};
+    //指向a的指针变量p
+    int (*p)[4] = a;
+
+}
+
 
 
 int main() {
-    //printf("value:%d", M(3)/2);
-    testArrPointer();
+    // printf("value:%d", M(3)/2);
+    demoPointer11();
     return 0;
 }
 
