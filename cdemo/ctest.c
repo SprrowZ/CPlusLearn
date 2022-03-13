@@ -332,7 +332,9 @@ void testFile2() {
     putchar("\n");
     fclose(fp);
 }
+
 #define  N  101
+
 void testFile3() {
     FILE *fp;
     fp = fopen("/Users/zhaozhenguo/Desktop/cdemo.txt", "rt");
@@ -342,43 +344,83 @@ void testFile3() {
     }
 //    char *append_content = "i want to fly~";
 //    fputs(append_content, fp);
-    char content[N+1];
-    while (fgets(content,N,fp)!=NULL){
-        printf("%s",content);
+    char content[N + 1];
+    while (fgets(content, N, fp) != NULL) {
+        printf("%s", content);
     }
     fclose(fp);
 
 }
+
 #define M 3
-struct FileStu{
+struct FileStu {
     char name[10];//name
     int num; // number
     int age;//age
     float score;
-} boys[M] ={
-        "李一",1,20,78.5,
-        "王二",2,22,88.5,
-        "张三",3,24,99.5
-        },boy,*pboys;
+} boys[M] = {
+        "李一", 1, 20, 78.5,
+        "王二", 2, 22, 88.5,
+        "张三", 3, 24, 99.5
+}, boy, *pboys;
 
 void testFile4() {
-    FILE  *fp;
+    FILE *fp;
     int i;
     pboys = boys;
-    if ((fp = fopen("/Users/zhaozhenguo/Desktop/cdemo.txt","wb+"))==NULL){
+    if ((fp = fopen("/Users/zhaozhenguo/Desktop/cdemo.txt", "wb+")) == NULL) {
         printf("Cannot open file!bizzzzzz~");
         exit(1);
     }
-    fwrite(boys,sizeof(struct FileStu),3,fp);
-    fseek(fp,sizeof (struct FileStu),SEEK_SET);//移动位置指针
-    fread(&boy,sizeof (struct  FileStu),1,fp);//读取一条学生信息到boy中
-    printf("%s %d %d %f\n",boy.name,boy.num,boy.age,boy.score);
+    fwrite(boys, sizeof(struct FileStu), 3, fp);
+    fseek(fp, sizeof(struct FileStu), SEEK_SET);//移动位置指针
+    fread(&boy, sizeof(struct FileStu), 1, fp);//读取一条学生信息到boy中
+    printf("%s %d %d %f\n", boy.name, boy.num, boy.age, boy.score);
     fclose(fp);
 }
 
+void realCopyFile(char *readFile, char *writeFile);
 
-int main() {
-    testFile4();
-    return 0;
+void copyFile() {
+    char readFile[100];
+    char writeFile[100];
+    //todo 指定输入输出文件
+    realCopyFile(readFile, writeFile);
 }
+
+void realCopyFile(char *readFile, char *writeFile) {
+    FILE *fpRead;
+    FILE *fpWrite;
+    int bufferLen = 1024 * 4;
+    char *buffer = (char *) malloc(bufferLen);
+    int readCount; //实际读取到的字节数
+    if ((fpRead = fopen(readFile, "rb")) == NULL || (fpWrite = fopen(writeFile, "wb")) == NULL) {
+        printf("Cannot open file");
+        exit(1);
+    }
+    //不断从fileRead读取内容，放在缓冲区，再将缓冲区的内容写入到fileWrite
+    while ((readCount = fread(buffer, 1, bufferLen, fpRead)) > 0) {
+        fwrite(buffer, readCount, 1, fpWrite);
+    }
+    free(buffer);
+    fclose(fpRead);
+    fclose(fpWrite);
+}
+
+//获取文件长度
+long fsize(FILE *fp) {
+    long n;//文件长度
+    fpos_t fpos;
+    fgetpos(fp, &fpos);//获取当前文件位置
+    fseek(fp, 0, SEEK_END);
+    n = ftell(fp);
+    fsetpos(fp, &fpos);//恢复之前的位置
+    return n;
+}
+
+//
+//int main() {
+//    testFile4();
+//    return 0;
+//}
 
