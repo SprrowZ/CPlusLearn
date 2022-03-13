@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <string>
 #include "chapter2.h"
 
 using namespace std;
@@ -110,12 +111,18 @@ void test3() {
 
 
 class VLA {
-public:
-    static int num;
+
 public:
     VLA(int len);
 
     ~VLA();
+
+public:
+    static int num;
+
+    static int getNum();
+
+    int *getItemPointer() const;
 
 private:
     int *at(int i);//获取第i个元素的指针
@@ -134,13 +141,93 @@ VLA::VLA(int len) : m_len(len) {
     int realLen = this->m_len;
 
 }
+
 //析构函数
 VLA::~VLA() {
     delete[] m_arr;
 }
 
+int VLA::getNum() {
+    return num;
+}
+
+int VLA::num = 10;
+
+int *VLA::getItemPointer() const {
+    return m_p;
+}
+
+class TeamLeader;
+
+class Manager {
+public:
+    Manager(int num, char *name);
+
+public:
+    void show(TeamLeader *ptl);
+
+private:
+    int m_num;
+    char *m_name;
+    char *province;
+
+};
+
+class TeamLeader {
+public :
+    TeamLeader(char *name, int num);
+
+private:
+    char *m_name;
+    int m_num;
+public:
+    friend class Manager;
+
+};
+
+
+Manager::Manager(int num, char *name) : m_num(num), m_name(name) {
+}
+
+TeamLeader::TeamLeader(char *name, int num) : m_name(name), m_num(num) {}
+
+void Manager::show(TeamLeader *ptl) {
+    cout << ptl->m_name << "的编号是：" << ptl->m_num;
+}
+
+void test4() {
+    VLA vla = VLA(10);
+    int num = VLA::num;
+
+}
+
+void test5() {
+
+    TeamLeader teamLeader("Wang", 2);
+    Manager manager(1, "Li");
+    manager.show(&teamLeader);
+}
+
+void test6() {
+    string s1; //只定义未初始化，编译器会将默认值""赋值给s1
+    string s2 = "c plus plus";
+    string s3 = s2;
+    string s4(5, 's'); //由5个's'组成的字符串
+    int s4len = s4.length();
+
+    for (int i = 0; i <s4len ; ++i) {
+        cout<<s4[i]<<" ";
+    }
+    s2.insert(7,"amazing~");
+    //删除字符串
+    s2.erase(0,2);
+   int index =  s2.find('p',3);
+   int index2 = s2.find_first_of('s',5);
+   int index3 = s2.rfind('s',10);
+}
+
 
 int main() {
-    test3();
+    test5();
     return 1;
 }
