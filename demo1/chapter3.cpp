@@ -40,8 +40,8 @@ void testB() {
     cout << "result:" << b << endl;
 }
 
-int main() {
-//    testA();
-    testB();
-    return 1;
-}
+//int main() {
+////    testA();
+//    testB();
+//    return 1;
+//}
