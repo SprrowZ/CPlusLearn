@@ -10,18 +10,21 @@ using namespace std;
 class People {
 public:
     void show();
+
 protected:
     char *m_name;
     int m_age;
 
 };
-void  People::show() {
- cout<<m_name<<"的年龄是："<<m_age<<endl;
+
+void People::show() {
+    cout << m_name << "的年龄是：" << m_age << endl;
 }
 
 class Student : public People {
 public:
-   void learning();
+    void learning();
+
 public:
     using People::m_name;//将protected改为public
     using People::m_age; //将protected改为public
@@ -31,7 +34,7 @@ private:
 };
 
 void Student::learning() {
-    cout<<"我是："<<m_name<<",今年"<<m_age<<"岁，这次考了"<<m_score<<endl;
+    cout << "我是：" << m_name << ",今年" << m_age << "岁，这次考了" << m_score << endl;
 }
 
 void testX() {
@@ -44,40 +47,75 @@ void testX() {
 }
 
 
-class Human{
+class Human {
 protected:
     char *m_name;
     int m_age;
 public:
-    Human(char *,int);
+    Human(char *, int);
 
 };
-Human::Human(char * name, int age):m_name(name),m_age(age) {}
 
-class Child:public Human{
+Human::Human(char *name, int age) : m_name(name), m_age(age) {}
+
+class Child : public Human {
 private:
     float m_score;
 public:
-    Child(char*,int ,float);
+    Child(char *, int, float);
+
     void display();
 };
 
-Child::Child(char *name,int age,float score):Human(name,age),m_score(score){
+Child::Child(char *name, int age, float score) : Human(name, age), m_score(score) {
 
 }
+
 void Child::display() {
-    cout<<m_name<<"的年龄是："<<m_age<<",其成绩为："<<m_score<<endl;
+    cout << m_name << "的年龄是：" << m_age << ",其成绩为：" << m_score << endl;
 }
-void testY(){
-    Child child("二狗",12,87.5);
+
+void testY() {
+    Child child("二狗", 12, 87.5);
     child.display();
 }
 
 
-int main() {
-    testY();
-    return 1;
+class A {
+protected:
+    int m_num;
+};
+
+class B : virtual public A {
+protected:
+    int m_sex;
+};
+
+class C : virtual public A {
+protected:
+    int m_age;
+};
+
+class D : public B, public C {
+public:
+    string m_name;
+
+public:
+    void setNum(int a) {
+        m_num = a;
+    };
+};
+
+void testM() {
+    A instance;
+
 }
+
+
+//int main() {
+//    testY();
+//    return 1;
+//}
 
 
 
